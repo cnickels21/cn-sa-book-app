@@ -7,15 +7,15 @@
 
 <body>
 
-    <form action="/order" method="POST">
+    <form action="/searches" method="POST">
         <label>
             <span>Search:</span>
-            <input type="text" name="book" />
+            <input type="text" name="query" />
         </label>
         <label>Author</label>
-        <input type="radio" id="author" name="search" value="author">
-        <label>Book</label>
-        <input type="radio" id="book" name="search" value="book">
+        <input type="radio" id="author" name="search" value="Author">
+        <label>Title</label>
+        <input type="radio" id="book" name="search" value="Title">
         <button>Search for Books!</button>
     </form>
     
