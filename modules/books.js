@@ -3,7 +3,6 @@
 const superagent = require('superagent');
 
 function bookHandler(request, response) {
-    console.log(request.body);
     let url = 'https://www.googleapis.com/books/v1/volumes';
     superagent.get(url)
         .query({
@@ -16,7 +15,7 @@ function bookHandler(request, response) {
                 return new Book(book);
             })
             response.send(bookReturn);
-            // response.render('./views/pages/searches/show');
+            // response.render('pages/searches/show');
         })
         .catch(error => {
             console.error(error);
