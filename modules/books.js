@@ -8,7 +8,7 @@ function bookHandler(request, response) {
     superagent.get(url)
         .query({
             key: process.env.BOOK_KEY,
-            q: `${request.body.query}+in${request.body.search}`,
+            q: `+in${request.body.search}:${request.body.query}`,
         })
         .then(bookResponse => {
             let bookData = JSON.parse(bookResponse.text);
