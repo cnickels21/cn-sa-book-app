@@ -2,8 +2,21 @@
 
 const superagent = require('superagent');
 
-function bookHandler() {
-
+function bookHandler(request,response) {
+    const book=request.query.Book
+    let url = ''
+    superagent.get(url);
+    .query({
+     KEY: process.env.BOOKS_KEY,
+     q:books,
+     Format:jason
+    })
+    .then(bookResponse => {
+        let bookData = bookResponse.body;
+        const book = new BOOK(book, bookData);
+        setLocationInCache(city, location);
+        response.send(location);
+      })
 }
 
 function Book(googleData) {
