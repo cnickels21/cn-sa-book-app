@@ -13,7 +13,7 @@ app.use(express.static('./public'))
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/', (request, response) => {
+app.get('/hello', (request, response) => {
     response.render('sub-folder/index');
 });
 
