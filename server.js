@@ -13,6 +13,10 @@ app.use(express.static('./public'))
 
 const PORT = process.env.PORT || 3000;
 
+app.get('/', (request, response) => {
+    response.render('pages/searches/new');
+})
+
 app.get('/hello', (request, response) => {
     response.render('pages/index');
 });
