@@ -1,14 +1,15 @@
 'use strict'; 
 
 require('dotenv').config();
+const cors = require('cors');
 
 const express = require('express');
-const cors = require('cors');
 const app = express();
 
 app.use(cors());
 
 app.set('view engine', 'ejs');
+app.use(express.static('./public'))
 
 const PORT = process.env.PORT || 3000;
 
