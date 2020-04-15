@@ -14,8 +14,8 @@ function bookHandler(request, response) {
             let bookReturn = bookData.items.map(book => {
                 return new Book(book);
             })
-            response.send(bookReturn);
-            // response.render('pages/searches/show');
+            // response.send(bookReturn);
+            response.render('pages/searches/show', bookReturn);
         })
         .catch(error => {
             console.error(error);
@@ -23,7 +23,7 @@ function bookHandler(request, response) {
 }
 
 function Book(googleData) {
-    this.image = googleData.imageLinks.thumbnail.replace('http://', 'https://')
+    this.image = (googleData.imageLinks ? thumbnail.replace('http://', 'https://') : '../public/images/book_placeholder.jfif');
     this.title = googleData.volumeInfo.title;
     this.authors = googleData.volumeInfo.authors;
     this.description = googleData.volumeInfo.description;
