@@ -6,7 +6,12 @@
 
     <body>
 
-        <img src='<%=book.image%>'>
+        <% books.forEach( item => { %>
+        <img src="<%= item.image %>">
+        <h2><%= item.title %></h2>
+        <h3><%= item.authors %></h3>
+        <p><%= item.description %></p>
+        <% }) %>
 
     </body>
 </html>

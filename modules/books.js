@@ -14,8 +14,12 @@ function bookHandler(request, response) {
             let bookReturn = bookData.items.map(book => {
                 return new Book(book);
             })
+            console.log(bookReturn);
+            let viewModel = {
+                books: bookReturn
+            }
             // response.send(bookReturn);
-            response.render('pages/searches/show', bookReturn);
+            response.render('pages/searches/show', viewModel);
         })
         .catch(error => {
             console.error(error);
@@ -23,10 +27,12 @@ function bookHandler(request, response) {
 }
 
 function Book(googleData) {
-    this.image = (googleData.imageLinks ? thumbnail.replace('http://', 'https://') : '../public/images/book_placeholder.jfif');
+    this.image = './images/book_placeholder.jfif';
     this.title = googleData.volumeInfo.title;
     this.authors = googleData.volumeInfo.authors;
     this.description = googleData.volumeInfo.description;
 }
 
 module.exports = bookHandler;
+
+// googleData.imageLinks.thumbnail.replace('http://', 'https://') ? googleData.imageLinks.thumbnail : 

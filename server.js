@@ -24,7 +24,7 @@ app.get('/', (request, response) => {
     response.render('pages/searches/new');
 })
 
-app.post('/searches', bookHandler)
+app.post('/show', bookHandler)
 
 // app.get('/hello', (request, response) => {
 //     response.render('pages/index');
