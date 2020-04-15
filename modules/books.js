@@ -2,7 +2,7 @@
 
 const superagent = require('superagent');
 
-function bookHandler(request, response) {
+function searchHandler(request, response) {
     let url = 'https://www.googleapis.com/books/v1/volumes';
     superagent.get(url)
         .query({
@@ -33,6 +33,6 @@ function Book(googleData) {
     this.isbn = googleData.volumeInfo.industryIdentifiers[0].identifier;
 }
 
-module.exports = bookHandler;
+module.exports = searchHandler;
 
 // googleData.imageLinks.thumbnail.replace('http://', 'https://') ? googleData.imageLinks.thumbnail : 

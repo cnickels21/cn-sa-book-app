@@ -1,3 +1,4 @@
+
 'use strict'; 
 
 // App requirements
@@ -6,6 +7,11 @@ const cors = require('cors');
 
 const express = require('express');
 const app = express();
+const pg = require('pg');
+
+const client = new pg.Client(process.env.DATABASE_URL);
+
+client.on('error', error => {throw error});
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -17,7 +23,7 @@ app.use(express.static('./public'))
 const PORT = process.env.PORT || 3000;
 
 // Modules
-const bookHandler = require('./modules/books')
+const searchHandler = require('./modules/books')
 
 // Server Paths
 app.get('/', (request, response) => {
@@ -28,7 +34,7 @@ app.get('/search', (request, response) => {
     response.render('pages/searches/new');
 })
 
-app.post('/show', bookHandler)
+app.post('/show', searchHandler)
 
 // app.get('/hello', (request, response) => {
 //     response.render('pages/index');
@@ -37,6 +43,15 @@ app.post('/show', bookHandler)
 // app.get('/hello', bookHandler);
 
 // Listen
-app.listen(PORT, () => {
-    console.log(`http://localhost:${PORT}`);
-});
+
+function getBooks(request, response) {
+  const SQL = 'SELECT * FROM books';
+
+client.connect()
+    .then(() => {
+    console.log('Database connected.');
+    app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
+  })
+  .catch(error => {
+    throw `Something went wrong: ${error}`;
+  });

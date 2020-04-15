@@ -1,0 +1,1 @@
+INSERT INTO books (title, authors, isbn, image_url, summary) VALUES('Harry Potter', 'J.K. Rowling', '1234', 'null', 'This is a harry potter book');
