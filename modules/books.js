@@ -30,6 +30,7 @@ function Book(googleData) {
     this.title = googleData.volumeInfo.title;
     this.authors = googleData.volumeInfo.authors;
     this.description = googleData.volumeInfo.description;
+    this.isbn = googleData.volumeInfo.industryIdentifiers[0].identifier;
 }
 
 module.exports = bookHandler;
