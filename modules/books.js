@@ -14,7 +14,6 @@ function bookHandler(request, response) {
             let bookReturn = bookData.items.map(book => {
                 return new Book(book);
             })
-            console.log(bookReturn);
             let viewModel = {
                 books: bookReturn
             }

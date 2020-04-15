@@ -21,6 +21,10 @@ const bookHandler = require('./modules/books')
 
 // Server Paths
 app.get('/', (request, response) => {
+    response.render('pages/index');
+})
+
+app.get('/search', (request, response) => {
     response.render('pages/searches/new');
 })
 
