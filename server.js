@@ -27,7 +27,7 @@ const searchHandler = require('./modules/books')
 
 // Server Paths
 app.get('/', (request, response) => {
-    response.render('pages/index');
+    response.render('pages/index', getBooks(request, response));
 })
 
 app.get('/search', (request, response) => {
@@ -46,6 +46,20 @@ app.post('/show', searchHandler)
 
 function getBooks(request, response) {
   const SQL = 'SELECT * FROM books';
+
+  client.query(SQL)
+  .then(results => {
+    const { rowCount, rows } = results;
+    // console.log('/ db result', rows);
+
+    response.render('index', {
+      books: rows
+    });
+  });
+};
+
+
+
 
 client.connect()
     .then(() => {
