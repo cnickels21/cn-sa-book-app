@@ -23,6 +23,7 @@ function bookHandler(request, response) {
 }
 
 function Book(googleData) {
+    this.image = googleData.imageLinks.thumbnail.replace('http://', 'https://')
     this.title = googleData.volumeInfo.title;
     this.authors = googleData.volumeInfo.authors;
     this.description = googleData.volumeInfo.description;
