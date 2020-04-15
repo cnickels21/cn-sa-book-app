@@ -1,10 +1,13 @@
 'use strict'; 
 
+// App requirements
 require('dotenv').config();
 const cors = require('cors');
 
 const express = require('express');
 const app = express();
+
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 
@@ -13,10 +16,23 @@ app.use(express.static('./public'))
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/hello', (request, response) => {
-    response.render('sub-folder/index');
-});
+// Modules
+const bookHandler = require('./modules/books')
 
+// Server Paths
+app.get('/', (request, response) => {
+    response.render('pages/searches/new');
+})
+
+app.post('/searches', bookHandler)
+
+// app.get('/hello', (request, response) => {
+//     response.render('pages/index');
+// });
+
+// app.get('/hello', bookHandler);
+
+// Listen
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
 });

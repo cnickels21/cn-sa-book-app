@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Books</title>
+</head>
+
+<body>
+
+    <form action="/searches" method="POST">
+        <label>
+            <span>Search:</span>
+            <input type="text" name="query" required/>
+        </label>
+        <label>Author</label>
+        <input type="radio" id="author" name="search" value="Author" checked>
+        <label>Title</label>
+        <input type="radio" id="book" name="search" value="Title">
+        <button>Search for Books!</button>
+    </form>
+    
+</body>
+
+</html>
