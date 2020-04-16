@@ -55,7 +55,9 @@ function getBooks(request, response) {
     response.render('index', {
       books: rows
     });
-  });
+    
+  })
+  .catch(err => handleError(err, response));
 };
 
 
@@ -69,3 +71,12 @@ client.connect()
   .catch(error => {
     throw `Something went wrong: ${error}`;
   });
+
+  function handleError(err, response) {
+    let viewModel = {
+      error: err,
+    };
+    response.render('pages/error', viewModel);
+  }
+
+  module.exports = handleError;
