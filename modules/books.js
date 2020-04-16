@@ -2,7 +2,7 @@
 
 const superagent = require('superagent');
 
-function bookHandler(request, response) {
+function searchHandler(request, response) {
     let url = 'https://www.googleapis.com/books/v1/volumes';
     superagent.get(url)
         .query({
@@ -14,8 +14,11 @@ function bookHandler(request, response) {
             let bookReturn = bookData.items.map(book => {
                 return new Book(book);
             })
-            response.send(bookReturn);
-            // response.render('pages/searches/show');
+            let viewModel = {
+                books: bookReturn
+            }
+            // response.send(bookReturn);
+            response.render('pages/searches/show', viewModel);
         })
         .catch(error => {
             console.error(error);
@@ -23,9 +26,13 @@ function bookHandler(request, response) {
 }
 
 function Book(googleData) {
+    this.image = './images/book_placeholder.jfif';
     this.title = googleData.volumeInfo.title;
     this.authors = googleData.volumeInfo.authors;
     this.description = googleData.volumeInfo.description;
+    this.isbn = googleData.volumeInfo.industryIdentifiers[0].identifier;
 }
 
-module.exports = bookHandler;
+module.exports = searchHandler;
+
+// googleData.imageLinks.thumbnail.replace('http://', 'https://') ? googleData.imageLinks.thumbnail : 
