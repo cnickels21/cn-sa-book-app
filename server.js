@@ -26,9 +26,8 @@ const PORT = process.env.PORT || 3000;
 const searchHandler = require('./modules/books')
 
 // Server Paths
-app.get('/', (request, response) => {
-    response.render('pages/index', getBooks(request, response));
-})
+app.get('/', getBooks);
+
 
 app.get('/search', (request, response) => {
     response.render('pages/searches/new');
@@ -51,9 +50,9 @@ function getBooks(request, response) {
   .then(results => {
     const { rowCount, rows } = results;
     // console.log('/ db result', rows);
-
-    response.render('index', {
-      books: rows
+    console.log(results);
+    response.render('pages/index', {
+      books: rows,
     });
     
   })
