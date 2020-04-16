@@ -33,7 +33,14 @@ app.get('/search', (request, response) => {
     response.render('pages/searches/new');
 })
 
-app.post('/show', searchHandler)
+
+// app.get('/tasks/:task_id', getOneTask);
+
+app.post('/show', searchHandler);
+
+app.post('/books', addBook);
+
+app.get('/details/:id', getOneBook);
 
 // app.get('/hello', (request, response) => {
 //     response.render('pages/index');
@@ -50,7 +57,6 @@ function getBooks(request, response) {
   .then(results => {
     const { rowCount, rows } = results;
     // console.log('/ db result', rows);
-    console.log(results);
     response.render('pages/index', {
       books: rows,
     });
@@ -78,4 +84,49 @@ client.connect()
     response.render('pages/error', viewModel);
   }
 
-  module.exports = handleError;
+
+  function addBook(request, response) {
+    // console.log('POST /books', request.body);
+    const { title, authors, isbn , image_url, summary } = request.body;
+    console.log(image_url, summary);
+    const SQL = `
+      INSERT INTO books (title, authors, isbn , image_url, summary)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING id
+    `;
+    const values = [title, authors, isbn , image_url, summary];
+
+    // POST - REDIRECT - GET
+    client.query(SQL, values)
+      .then(results => {
+        console.log(results);
+        let id = results.rows[0].id;
+        response.redirect(`/details/${id}`);
+      })
+      .catch(err => handleError(err, response))
+  }
+
+
+  function getOneBook(request, response) {
+
+    const SQL = `
+      SELECT *
+      FROM books
+      WHERE id = $1
+      LIMIT 1;
+    `;
+  
+    client.query(SQL, [request.params.id])
+      .then(results => {
+        const { rows } = results;
+        
+        if (rows.length < 1) {
+          handleError('Book Not Found', response)
+        } else {
+          response.render('pages/searches/details', {
+            book: rows[0]
+          });
+        }
+      })
+      .catch(err => handleError(err, response))
+  }
