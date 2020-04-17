@@ -20,10 +20,15 @@ function searchHandler(request, response) {
             // response.send(bookReturn);
             response.render('pages/searches/show', viewModel);
         })
-        .catch(error => {
-            console.error(error);
-        })
+        .catch(err => handleError(err, response));
 }
+
+function handleError(err, response) {
+    let viewModel = {
+      error: err,
+    };
+    response.render('pages/error', viewModel);
+  }
 
 function Book(googleData) {
     this.image = './images/book_placeholder.jfif';

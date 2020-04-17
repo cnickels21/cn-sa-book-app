@@ -1,18 +1,40 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Book Results</title>
-    </head>
 
-    <body>
+<head>
+    <title>Book Results</title>
+    <link rel="stylesheet" href="../../../public/styles/base.css" />
+    <link rel="stylesheet" href="../../../public/styles/layout.css"/>
+</head>
 
-        <% books.forEach( item => { %>
+<body>
+
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/search">Search</a></li>
+    </ul>
+
+    <% books.forEach( item => { %>
+    <div id="card-container">
+        <form action="/books" method="POST">
+            <input type="hidden" name="image_url" value="<%= item.image %>">
+            <input type="hidden" name="title" value="<%= item.title %>">
+            <input type="hidden" name="authors" value="<%= item.authors %>">
+            <input type="hidden" name="summary" value="<%= item.description%>">
+            <input type="hidden" name="isbn" value="<%= item.isbn %>">
+            <button type="submit">Save This Book</button>
+        </form>
+        <button id="details">View Details</button>
         <img src="<%= item.image %>">
         <h2><%= item.title %></h2>
         <h3><%= item.authors %></h3>
         <p><%= item.description %></p>
         <h4><%= item.isbn %></h4>
-        <% }) %>
+    </div>
+    <% }) %>
 
-    </body>
+
+</body>
+
+
 </html>

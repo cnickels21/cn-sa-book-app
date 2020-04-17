@@ -1,8 +1,13 @@
-html{
-    background-color:lightblue;
-
+* {
+    box-sizing: border-box;
 }
-h1{
+
+body {
+    max-width: 480px;
+    background-color:lightblue;
+}
+
+h1 {
     color: midnightblue;
     font-size: 20px;
 }
