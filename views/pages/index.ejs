@@ -20,6 +20,14 @@
       <h3><%= item.authors %></h3>
       <p><%= item.summary %></p>
       <h4><%= item.isbn %></h4>
+      <button type="submit">View Details</button>
+      <form action="/books" method="POST">
+        <input type="hidden" name="image_url" value="<%= item.image %>">
+        <input type="hidden" name="title" value="<%= item.title %>">
+        <input type="hidden" name="authors" value="<%= item.authors %>">
+        <input type="hidden" name="summary" value="<%= item.description%>">
+        <input type="hidden" name="isbn" value="<%= item.isbn %>">
+    </form>
     </div>
     <% }) %>
 

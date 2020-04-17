@@ -2,11 +2,15 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="./styles/base.css" />
-    <link rel="stylesheet" href="./styles/layout.css" />
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="../styles/layout.css" />
+    <link rel="stylesheet" href="../styles/modules.css" />
 </head>
 
 <body>
+
+    <%- include('../../layouts/header') %>
+
     <main>
 
         <section class="books-view container">
@@ -17,13 +21,13 @@
                 <h3><%= books.authors %></h3>
                 <p><%= books.summary %></p>
                 <h4><%= books.isbn %></h4>
-
-                <form action="/index" method="POST">
-                    <input type="hidden" name="image_url" value="<%= item.image %>">
-                    <input type="hidden" name="title" value="<%= item.title %>">
-                    <input type="hidden" name="authors" value="<%= item.authors %>">
-                    <input type="hidden" name="summary" value="<%= item.description%>">
-                    <input type="hidden" name="isbn" value="<%= item.isbn %>">
+               
+                <form action="/" method="POST">
+                    <input type="hidden" name="image_url" value="<%= books.image %>">
+                    <input type="hidden" name="title" value="<%= books.title %>">
+                    <input type="hidden" name="authors" value="<%= books.authors %>">
+                    <input type="hidden" name="summary" value="<%= books.description%>">
+                    <input type="hidden" name="isbn" value="<%= books.isbn %>">
                     <button type="submit">Return Home</button>
                 </form>
             </div>
