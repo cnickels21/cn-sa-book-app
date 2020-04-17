@@ -31,7 +31,7 @@ function handleError(err, response) {
   }
 
 function Book(googleData) {
-    this.image = './images/book_placeholder.jfif';
+    this.image = parseBookImage(googleData.volumeInfo.imageLinks);
     this.title = googleData.volumeInfo.title;
     this.authors = googleData.volumeInfo.authors;
     this.description = googleData.volumeInfo.description;
@@ -39,7 +39,14 @@ function Book(googleData) {
 }
 
 module.exports = searchHandler;
+const placeholder='http://via.placeholder.com/300';
 
 
+function parseBookImage(imageLinks){
+    if (!imageLinks){
+        return placeholder;
+    }
+    return imageLinks.thumbnail;
+}
 
 // googleData.imageLinks.thumbnail.replace('http://', 'https://') ? googleData.imageLinks.thumbnail : 
