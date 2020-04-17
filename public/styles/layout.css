@@ -25,6 +25,12 @@ li {
     margin: 15px;
 }
 
+h3 {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 16px;
+}
+
 .card-container {
     width: 80%;
     margin: 30px auto;

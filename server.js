@@ -27,26 +27,14 @@ const searchHandler = require('./modules/books')
 
 // Server Paths
 app.get('/', getBooks);
-
-
 app.get('/search', (request, response) => {
   response.render('pages/searches/new');
 })
 
-
-// app.get('/tasks/:task_id', getOneTask);
-
 app.post('/show', searchHandler);
-
 app.post('/books', addBook);
 
 app.get('/details/:id', getOneBook);
-
-// app.get('/hello', (request, response) => {
-//     response.render('pages/index');
-// });
-
-// app.get('/hello', bookHandler);
 
 // Listen
 
@@ -59,6 +47,7 @@ function getBooks(request, response) {
       // console.log('/ db result', rows);
       response.render('pages/index', {
         books: rows,
+        count: rowCount,
       });
 
     })
@@ -128,3 +117,4 @@ function getOneBook(request, response) {
     })
     .catch(err => handleError(err, response))
 }
+
