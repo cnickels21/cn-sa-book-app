@@ -10,13 +10,20 @@
       <li><a href="/">Home</a></li>
       <li><a href="/search">Search</a></li> 
     </ul>
-    <h1>Hello World</h1>
+    <h1>BOOKS APP</h1>
+<main>
 
     <% books.forEach(item => { %>
-      <img src="<%= item.image %>">
-        <h2><%= item.title %></h2>
-        <h3><%= item.authors %></h3>
+      <div class="card-container">
+      <img src="<%= item.image_url %>">
+      <h2><%= item.title %></h2>
+      <h3><%= item.authors %></h3>
+      <p><%= item.summary %></p>
+      <h4><%= item.isbn %></h4>
+      </div>
     <% }) %>
- 
+  
+  </main>
   </body>
 </html>
+

@@ -3,8 +3,8 @@
 
 <head>
     <title>Book Results</title>
-    <link rel="stylesheet" href="../../../public/styles/base.css" />
-    <link rel="stylesheet" href="../../../public/styles/layout.css"/>
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/layout.css"/>
 </head>
 
 <body>
@@ -15,7 +15,14 @@
     </ul>
 
     <% books.forEach( item => { %>
-    <div id="card-container">
+    <div class="card-container">
+        
+        <img src="<%= item.image %>">
+        <h2><%= item.title %></h2>
+        <h3><%= item.authors %></h3>
+        <p><%= item.description %></p>
+        <h4><%= item.isbn %></h4>
+        <button id="details">View Details</button>
         <form action="/books" method="POST">
             <input type="hidden" name="image_url" value="<%= item.image %>">
             <input type="hidden" name="title" value="<%= item.title %>">
@@ -24,12 +31,6 @@
             <input type="hidden" name="isbn" value="<%= item.isbn %>">
             <button type="submit">Save This Book</button>
         </form>
-        <button id="details">View Details</button>
-        <img src="<%= item.image %>">
-        <h2><%= item.title %></h2>
-        <h3><%= item.authors %></h3>
-        <p><%= item.description %></p>
-        <h4><%= item.isbn %></h4>
     </div>
     <% }) %>
 

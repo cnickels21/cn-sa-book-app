@@ -1,4 +1,22 @@
-#card-container {
+.card-container {
     width: 80%;
-    margin: 0 auto;
+    margin: 30px auto;
+    padding: 15px;
+    border: 5px solid midnightblue;
+    border-radius: 15px;
+    display: grid;
+}
+
+.card-container > * {
+    text-align: center;
+}
+
+.card-container > img {
+    justify-self: center;
+}
+
+button {
+    width: 40%;
+    justify-self: center;
+    margin: 5px;
 }

@@ -3,22 +3,29 @@
 
 <head>
     <title>Books</title>
-    <link rel="stylesheet" href="../../../public/styles/base.css"/>
-    <link rel="stylesheet" href="../../../public/styles/layout.css"/>
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/layout.css" />
+    <link rel="stylesheet" href="./styles/modules.css" />
 </head>
 
 <body>
 
-    <form action="/show" method="POST">
-        <label>
-            <span>Search:</span>
-            <input type="text" name="query" required />
-        </label>
-        <label>Author</label>
-        <input type="radio" id="author" name="search" value="Author" checked>
-        <label>Title</label>
-        <input type="radio" id="book" name="search" value="Title">
-        <button>Search for Books!</button>
+    <form action="/show" method="POST" id="user-search">
+        <div id="label-1">
+            <label>
+                <span>Search:</span>
+                <input type="text" name="query" required />
+            </label>
+        </div>
+        <div id="label-2">
+            <label>Author</label>
+            <input type="radio" id="author" name="search" value="Author" checked>
+        </div>
+        <div id="label-3">
+            <label>Title</label>
+            <input type="radio" id="book" name="search" value="Title">
+        </div>
+        <button id="search-button">Search for Books!</button>
     </form>
 
 </body>

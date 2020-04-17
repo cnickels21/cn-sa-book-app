@@ -2,23 +2,26 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="../../../public/styles/base.css"/>
-    <link rel="stylesheet" href="../../../public/styles/layout.css"/>
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/layout.css" />
 </head>
 
 <body>
     <main>
+
         <section class="books-view container">
-            <ul id="book-list">
 
-                <img src="<%= book.image_url %>">
-                <h2><%= book.title %></h2>
-                <h3><%= book.authors %></h3>
-                <p><%= book.summary %></p>
-                <h4><%= book.isbn %></h4>
+            <div class="card-container">
+                <img src="<%= books.image_url %>">
+                <h2><%= books.title %></h2>
+                <h3><%= books.authors %></h3>
+                <p><%= books.summary %></p>
+                <h4><%= books.isbn %></h4>
+            </div>
 
-            </ul>
+
         </section>
+
     </main>
 </body>
 
