@@ -27,26 +27,14 @@ const searchHandler = require('./modules/books')
 
 // Server Paths
 app.get('/', getBooks);
-
-
 app.get('/search', (request, response) => {
   response.render('pages/searches/new');
 })
 
-
-// app.get('/tasks/:task_id', getOneTask);
-
 app.post('/show', searchHandler);
-
 app.post('/books', addBook);
 
 app.get('/details/:id', getOneBook);
-
-// app.get('/hello', (request, response) => {
-//     response.render('pages/index');
-// });
-
-// app.get('/hello', bookHandler);
 
 // Listen
 
@@ -59,6 +47,7 @@ function getBooks(request, response) {
       // console.log('/ db result', rows);
       response.render('pages/index', {
         books: rows,
+        count: rowCount,
       });
 
     })
@@ -88,7 +77,6 @@ function handleError(err, response) {
 function addBook(request, response) {
   // console.log('POST /books', request.body);
   const { title, authors, isbn, image_url, summary } = request.body;
-  console.log(image_url, summary);
   const SQL = `
       INSERT INTO books (title, authors, isbn , image_url, summary)
       VALUES ($1, $2, $3, $4, $5)
@@ -99,7 +87,6 @@ function addBook(request, response) {
   // POST - REDIRECT - GET
   client.query(SQL, values)
     .then(results => {
-      console.log(results);
       let id = results.rows[0].id;
       response.redirect(`/details/${id}`);
     })
@@ -130,3 +117,4 @@ function getOneBook(request, response) {
     })
     .catch(err => handleError(err, response))
 }
+

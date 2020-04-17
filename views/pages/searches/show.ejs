@@ -4,25 +4,29 @@
 <head>
     <title>Book Results</title>
     <link rel="stylesheet" href="./styles/base.css" />
-    <link rel="stylesheet" href="./styles/layout.css"/>
+    <link rel="stylesheet" href="./styles/layout.css" />
 </head>
 
 <body>
 
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/search">Search</a></li>
-    </ul>
+    <%- include('../../layouts/header') %>
 
     <% books.forEach( item => { %>
     <div class="card-container">
-        
+
         <img src="<%= item.image %>">
         <h2><%= item.title %></h2>
         <h3><%= item.authors %></h3>
         <p><%= item.description %></p>
         <h4><%= item.isbn %></h4>
-        <button id="details">View Details</button>
+        <form action="/books" method="POST">
+            <input type="hidden" name="image_url" value="<%= item.image %>">
+            <input type="hidden" name="title" value="<%= item.title %>">
+            <input type="hidden" name="authors" value="<%= item.authors %>">
+            <input type="hidden" name="summary" value="<%= item.description%>">
+            <input type="hidden" name="isbn" value="<%= item.isbn %>">
+            <button type="submit">View Details</button>
+        </form>
         <form action="/books" method="POST">
             <input type="hidden" name="image_url" value="<%= item.image %>">
             <input type="hidden" name="title" value="<%= item.title %>">
