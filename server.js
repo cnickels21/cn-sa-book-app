@@ -88,7 +88,6 @@ function handleError(err, response) {
 function addBook(request, response) {
   // console.log('POST /books', request.body);
   const { title, authors, isbn, image_url, summary } = request.body;
-  console.log(image_url, summary);
   const SQL = `
       INSERT INTO books (title, authors, isbn , image_url, summary)
       VALUES ($1, $2, $3, $4, $5)
@@ -99,7 +98,6 @@ function addBook(request, response) {
   // POST - REDIRECT - GET
   client.query(SQL, values)
     .then(results => {
-      console.log(results);
       let id = results.rows[0].id;
       response.redirect(`/details/${id}`);
     })

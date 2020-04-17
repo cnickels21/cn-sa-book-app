@@ -9,10 +9,7 @@
 
 <body>
 
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/search">Search</a></li>
-    </ul>
+    <%- include('../../layouts/header') %>
 
     <% books.forEach( item => { %>
     <div class="card-container">
