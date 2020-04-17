@@ -1,5 +1,5 @@
 
-'use strict'; 
+'use strict';
 
 // App requirements
 require('dotenv').config();
@@ -11,7 +11,7 @@ const pg = require('pg');
 
 const client = new pg.Client(process.env.DATABASE_URL);
 
-client.on('error', error => {throw error});
+client.on('error', error => { throw error });
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -30,7 +30,7 @@ app.get('/', getBooks);
 
 
 app.get('/search', (request, response) => {
-    response.render('pages/searches/new');
+  response.render('pages/searches/new');
 })
 
 
@@ -54,22 +54,22 @@ function getBooks(request, response) {
   const SQL = 'SELECT * FROM books';
 
   client.query(SQL)
-  .then(results => {
-    const { rowCount, rows } = results;
-    // console.log('/ db result', rows);
-    response.render('pages/index', {
-      books: rows,
-    });
-    
-  })
-  .catch(err => handleError(err, response));
+    .then(results => {
+      const { rowCount, rows } = results;
+      // console.log('/ db result', rows);
+      response.render('pages/index', {
+        books: rows,
+      });
+
+    })
+    .catch(err => handleError(err, response));
 };
 
 
 
 
 client.connect()
-    .then(() => {
+  .then(() => {
     console.log('Database connected.');
     app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
   })
@@ -77,56 +77,56 @@ client.connect()
     throw `Something went wrong: ${error}`;
   });
 
-  function handleError(err, response) {
-    let viewModel = {
-      error: err,
-    };
-    response.render('pages/error', viewModel);
-  }
+function handleError(err, response) {
+  let viewModel = {
+    error: err,
+  };
+  response.render('pages/error', viewModel);
+}
 
 
-  function addBook(request, response) {
-    // console.log('POST /books', request.body);
-    const { title, authors, isbn , image_url, summary } = request.body;
-    console.log(image_url, summary);
-    const SQL = `
+function addBook(request, response) {
+  // console.log('POST /books', request.body);
+  const { title, authors, isbn, image_url, summary } = request.body;
+  console.log(image_url, summary);
+  const SQL = `
       INSERT INTO books (title, authors, isbn , image_url, summary)
       VALUES ($1, $2, $3, $4, $5)
       RETURNING id
     `;
-    const values = [title, authors, isbn , image_url, summary];
+  const values = [title, authors, isbn, image_url, summary];
 
-    // POST - REDIRECT - GET
-    client.query(SQL, values)
-      .then(results => {
-        console.log(results);
-        let id = results.rows[0].id;
-        response.redirect(`/details/${id}`);
-      })
-      .catch(err => handleError(err, response))
-  }
+  // POST - REDIRECT - GET
+  client.query(SQL, values)
+    .then(results => {
+      console.log(results);
+      let id = results.rows[0].id;
+      response.redirect(`/details/${id}`);
+    })
+    .catch(err => handleError(err, response))
+}
 
 
-  function getOneBook(request, response) {
+function getOneBook(request, response) {
 
-    const SQL = `
+  const SQL = `
       SELECT *
       FROM books
       WHERE id = $1
       LIMIT 1;
     `;
-  
-    client.query(SQL, [request.params.id])
-      .then(results => {
-        const { rows } = results;
-        
-        if (rows.length < 1) {
-          handleError('Book Not Found', response)
-        } else {
-          response.render('pages/searches/details', {
-            book: rows[0]
-          });
-        }
-      })
-      .catch(err => handleError(err, response))
-  }
+
+  client.query(SQL, [request.params.id])
+    .then(results => {
+      const { rows } = results;
+
+      if (rows.length < 1) {
+        handleError('Book Not Found', response)
+      } else {
+        response.render('pages/searches/details', {
+          books: rows[0]
+        });
+      }
+    })
+    .catch(err => handleError(err, response))
+}
