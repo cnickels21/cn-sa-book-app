@@ -40,4 +40,6 @@ function Book(googleData) {
 
 module.exports = searchHandler;
 
+
+
 // googleData.imageLinks.thumbnail.replace('http://', 'https://') ? googleData.imageLinks.thumbnail : 

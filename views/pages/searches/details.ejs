@@ -1,27 +1,27 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
-    <link rel="stylesheet" href="./styles/base.css"/>
-    <link rel="stylesheet" href="./styles/layout.css"/>
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/layout.css" />
 </head>
 
 <body>
-    <main> 
+    <main>
 
         <section class="books-view container">
 
-            
+            <div class="card-container">
                 <img src="<%= books.image_url %>">
                 <h2><%= books.title %></h2>
                 <h3><%= books.authors %></h3>
                 <p><%= books.summary %></p>
                 <h4><%= books.isbn %></h4>
-            
+            </div>
 
-         
+
         </section>
-        
+
     </main>
 </body>
 

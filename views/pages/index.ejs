@@ -14,11 +14,13 @@
 <main>
 
     <% books.forEach(item => { %>
+      <div class="card-container">
       <img src="<%= item.image_url %>">
       <h2><%= item.title %></h2>
       <h3><%= item.authors %></h3>
       <p><%= item.summary %></p>
       <h4><%= item.isbn %></h4>
+      </div>
     <% }) %>
   
   </main>
