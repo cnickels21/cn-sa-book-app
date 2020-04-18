@@ -4,7 +4,7 @@
 }
 
 body {
-    max-width: 480px;
+    width: 480px;
     background-color:lightblue;
     margin: 30px auto;
 }

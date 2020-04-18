@@ -22,6 +22,7 @@
       <h3><%= item.authors %></h3>
       <p><%= item.summary %></p>
       <h4><%= item.isbn %></h4>
+      <h6><%= books.bookshelves %></h6>
       
       <form action="/books" method="POST">
         <input type="hidden" name="image_url" value="<%= item.image_url %>">
