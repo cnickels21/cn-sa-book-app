@@ -21,16 +21,15 @@
                 <h3><%= books.authors %></h3>
                 <p><%= books.summary %></p>
                 <h4><%= books.isbn %></h4>
-               
-                <!-- <form action="/" method="POST">
-                    <input type="hidden" name="image_url" value="<%= books.image %>">
-                    <input type="hidden" name="title" value="<%= books.title %>">
-                    <input type="hidden" name="authors" value="<%= books.authors %>">
-                    <input type="hidden" name="summary" value="<%= books.description%>">
-                    <input type="hidden" name="isbn" value="<%= books.isbn %>">
-                    <button type="submit">Return Home</button>
-                </form> -->
+                <h6><%= books.bookshelves %></h6>
+
+                <form></form>
                 
+                <form action="/books/<%= books.id %>?_method=DELETE" method="POST">
+                    <button>DELETE</button>
+                </form>
+
+                 <a href="./<%= books.id %>/edit">EDIT</a>
             </div>
 
             

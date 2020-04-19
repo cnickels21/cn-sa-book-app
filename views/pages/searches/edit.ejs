@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>books</title>
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/layout.css" />
+</head>
+
+<body>
+
+    <%- include('../../layouts/header') %>
+
+    <main>
+
+
+        <section class="create-view container">
+            <h2 class="view-title">Edit Book <%= books.id %></h2>
+            <form id="update-form" action="/books/<%= books.id %>/edit?_method=PUT" method="post">
+                <fieldset>
+                    <legend>Edit Your Book</legend>
+                    <input type="text" name="title" value="<%= books.title %>" placeholder="Book">
+                    <input type="text" name="authors" value="<%= books.authors %>" placeholder="Author">
+                    <textarea name="description" placeholder="Description of the task" cols="30"
+                        rows="10"><%= books.description %></textarea>
+                    <input type="text" name="bookshelves" value="<%= books.bookshelves %>" placeholder="Genres">
+
+                    <input type="text" name="status" value="<%= books.status %>" placeholder="Status">
+                    <button type="submit">Update This Book</button>
+                </fieldset>
+            </form>
+        </section>
+
+    </main>
+</body>
+
+</html>
