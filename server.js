@@ -33,10 +33,11 @@ app.get('/search', (request, response) => {
 
 app.post('/show', searchHandler);
 app.post('/books', addBook);
-app.get('/details/:books_id', getOneBook);
+
+app.get('/books/:books_id', getOneBook);
 app.delete('/books/:books_id', deleteOneBook);
 app.put('/books/:books_id/edit', updateOneBook);
-app.get('/details/:books_id/edit', editOneBook);
+app.get('/books/:books_id/edit', editOneBook);
 
 // Listen
 
@@ -87,7 +88,7 @@ function addBook(request, response) {
   client.query(SQL, values)
     .then(results => {
       let id = results.rows[0].id;
-      response.redirect(`/details/${id}`);
+      response.redirect(`/books/${id}`);
     })
     .catch(err => handleError(err, response))
 }
@@ -118,13 +119,13 @@ function getOneBook(request, response) {
 }
 
 function deleteOneBook(request, response) {
-  console.log('DELETE', request.params.id)
+  console.log('DELETE', request.params.books_id)
   const SQL = `
     DELETE FROM books
     WHERE Id = $1
   `;
   console.log(request.params.id);
-  client.query(SQL, [request.params.id])
+  client.query(SQL, [request.params.books_id])
     .then(() => {
       response.redirect('/');
     })
@@ -148,22 +149,23 @@ function editOneBook(request, response) {
 }
 
 function updateOneBook(request, response, next) {
-  const { title, authors, isbn , image_url, summary,bookshelves } = request.body;
-
+  console.log(request.params);
+  const { title, authors, isbn , image_url, summary, bookshelves } = request.body;
+  
   const SQL = `
     UPDATE books SET
-    title=$1
-    authors=$2
-    isbn=$3
-    image_url=$4
-    summary=$5
+    title=$1,
+    authors=$2,
+    isbn=$3,
+    image_url=$4,
+    summary=$5,
     bookshelves=$6
-    WHERE Id = $7
+    WHERE id = $7
   `;
-  const parameters = [title, authors, isbn , image_url, summary,bookshelves,  parseInt(request.params.book_id)];
+  const parameters = [title, authors, isbn , image_url, summary, bookshelves,  parseInt(request.params.books_id)];
   client.query(SQL, parameters)
     .then(() => {
-      response.redirect(`/details/${request.params.books_id}`);
+      response.redirect(`/books/${request.params.books_id}`);
     })
-    .catch(next);
+    .catch( error => console.log(error));
 }
